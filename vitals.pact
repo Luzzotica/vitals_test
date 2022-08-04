@@ -68,8 +68,10 @@
     "Pay out vital tokens to those who have points accrued over the past period, zero out points"
     (with-capability (MODULE_ADMIN)
       (enforce (> amount 0.0) "Negative Transaction Amount")
+      ;  Get the point values as a list and sum them up using fold
       (let (point-values (select accounts-table ['points ] (where 'points (> 0.0))))
         (let (total-points (fold (+) 0 point-values))
+        ;  Get each participant, and map the list to pay each one their weighted amount based on points
           )))
       ;  (with-read accounts-table from { "balance":= from-bal }
         
